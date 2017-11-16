@@ -5,6 +5,7 @@
 
 (show-paren-mode 1)
 (setq ring-bell-function 'ignore)
+(setq inhibit-splash-screen t)
 
 ;;----------------
 ;; LOAD PACKAGES
@@ -19,7 +20,7 @@
 (setq package-list
       '(async helm gruvbox-theme company smartparens js2-mode js2-refactor
 	      xref-js2 company-tern flycheck json-mode tern
-	      magit exec-path-from-shell))
+	      magit exec-path-from-shell git-gutter))
 
 ; activate all the packages
 (package-initialize)
@@ -140,15 +141,19 @@
 
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
+(with-eval-after-load 'flycheck
+  (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t)))
+
 ;; GIT
 (require 'magit)
+(global-git-gutter-mode +1)
 
 ;;----------------
 ;; APPEARANCE
 ;;----------------
 
 (load-theme 'gruvbox t)
-(set-face-attribute 'default nil :font "Monaco-16")
+(set-face-attribute 'default nil :font "Monaco-14")
 
 
 ;;----------------
