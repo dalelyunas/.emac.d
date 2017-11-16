@@ -8,6 +8,9 @@
 (setq inhibit-splash-screen t)
 (setq-default indent-tabs-mode nil)
 
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+
 ;;----------------
 ;; LOAD PACKAGES
 ;;----------------
@@ -51,7 +54,7 @@
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-;; Better imenu
+;; better imenu
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
 (require 'js2-refactor)
@@ -104,8 +107,8 @@
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
 (setq helm-M-x-fuzzy-match t)
-(setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match    t)
+(setq helm-buffers-fuzzy-matching t)
+(setq helm-recentf-fuzzy-match t)
 
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 20)
@@ -142,6 +145,7 @@
 
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
+;; make eslint faster by disabling --print-config
 (with-eval-after-load 'flycheck
   (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t)))
 
