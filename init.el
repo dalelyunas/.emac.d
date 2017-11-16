@@ -6,6 +6,7 @@
 (show-paren-mode 1)
 (setq ring-bell-function 'ignore)
 (setq inhibit-splash-screen t)
+(setq-default indent-tabs-mode nil)
 
 ;;----------------
 ;; LOAD PACKAGES
