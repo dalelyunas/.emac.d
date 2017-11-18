@@ -8,8 +8,13 @@
 (setq inhibit-splash-screen t)
 (setq-default indent-tabs-mode nil)
 
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; save and backup files in tmp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;;----------------
 ;; LOAD PACKAGES
@@ -24,7 +29,8 @@
 (setq package-list
       '(async helm gruvbox-theme company smartparens js2-mode js2-refactor
 	      xref-js2 company-tern flycheck json-mode tern
-	      magit exec-path-from-shell git-gutter))
+	      magit exec-path-from-shell git-gutter projectile helm-projectile
+              vue-mode multi-term))
 
 ; activate all the packages
 (package-initialize)
@@ -94,9 +100,23 @@
 (define-key tern-mode-keymap (kbd "M-.") nil)
 (define-key tern-mode-keymap (kbd "M-,") nil)
 
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 2)
+
+;; PROJECTILE
+(require 'projectile)
+
+(setq projectile-completion-system 'helm)
+(projectile-mode)
+
+;; MULTI-TERM
+(require 'multi-term)
+(setq multi-term-program "/bin/zsh")
+
 ;; HELM
 (require 'helm)
 (require 'helm-config)
+(require 'helm-projectile)
 
 ;; keybindings
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -113,6 +133,8 @@
 (setq helm-autoresize-max-height 0)
 (setq helm-autoresize-min-height 20)
 (helm-autoresize-mode 1)
+
+(helm-projectile-on)
 
 (helm-mode 1)
 
