@@ -4,3 +4,4 @@ auto-save-list/*
 network-security.data
 elpa/*
 recentf
+*.eld

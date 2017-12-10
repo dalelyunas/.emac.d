@@ -25,12 +25,15 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 
+(add-to-list 'package-archives
+             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+
 ; list the packages you want
 (setq package-list
       '(async helm gruvbox-theme company smartparens js2-mode js2-refactor
 	      xref-js2 company-tern flycheck json-mode tern
 	      magit exec-path-from-shell git-gutter projectile helm-projectile
-              vue-mode multi-term))
+              vue-mode multi-term elpy))
 
 ; activate all the packages
 (package-initialize)
@@ -51,6 +54,9 @@
 ;; PATH
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+;; ELPY
+(elpy-enable)
 
 ;; ASYNC
 (require 'async)
@@ -180,7 +186,7 @@
 ;;----------------
 
 (load-theme 'gruvbox t)
-(set-face-attribute 'default nil :font "Monaco-14")
+(set-face-attribute 'default nil :font "Monaco-16")
 
 
 ;;----------------
