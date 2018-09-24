@@ -4,6 +4,7 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (show-paren-mode 1)
+(setq-default show-trailing-whitespace t)
 (setq ring-bell-function 'ignore)
 (setq inhibit-splash-screen t)
 (setq-default indent-tabs-mode nil)
@@ -31,9 +32,9 @@
 ; list the packages you want
 (setq package-list
       '(async helm gruvbox-theme company smartparens js2-mode js2-refactor
-	      xref-js2 company-tern flycheck json-mode tern
-	      magit exec-path-from-shell git-gutter projectile helm-projectile
-              vue-mode multi-term elpy))
+	      xref-js2 flycheck json-mode
+              magit exec-path-from-shell git-gutter projectile helm-projectile
+              vue-mode multi-term elpy sml-mode 2048-game))
 
 ; activate all the packages
 (package-initialize)
@@ -89,25 +90,8 @@
 (setq js2-mode-show-strict-warnings nil)
 
 ;; SMARTPARENS
-(require 'smartparens)
-(smartparens-global-mode 1)
-
-;; COMPANY
-(require 'company)
-(require 'tern)
-(require 'company-tern)
-
-(add-to-list 'company-backends 'company-tern)
-(add-hook 'js2-mode-hook (lambda ()
-                           (tern-mode)
-                           (company-mode)))
-
-;; Disable completion keybindings, as we use xref-js2 instead
-(define-key tern-mode-keymap (kbd "M-.") nil)
-(define-key tern-mode-keymap (kbd "M-,") nil)
-
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 2)
+;; (require 'smartparens)
+;; (smartparens-global-mode 1)
 
 ;; PROJECTILE
 (require 'projectile)
@@ -181,12 +165,15 @@
 (require 'magit)
 (global-git-gutter-mode +1)
 
+;; SML
+(require 'sml-mode)
+
 ;;----------------
 ;; APPEARANCE
 ;;----------------
 
 (load-theme 'gruvbox t)
-(set-face-attribute 'default nil :font "Monaco-16")
+(set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-14")
 
 
 ;;----------------
