@@ -4,7 +4,8 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (show-paren-mode 1)
-(setq-default show-trailing-whitespace t)
+(column-number-mode 1)
+
 (setq ring-bell-function 'ignore)
 (setq inhibit-splash-screen t)
 (setq-default indent-tabs-mode nil)
@@ -34,7 +35,7 @@
       '(async helm gruvbox-theme company smartparens js2-mode js2-refactor
 	      xref-js2 flycheck json-mode
               magit exec-path-from-shell git-gutter projectile helm-projectile
-              vue-mode multi-term elpy sml-mode 2048-game))
+              vue-mode elpy sml-mode 2048-game))
 
 ; activate all the packages
 (package-initialize)
@@ -167,6 +168,14 @@
 
 ;; SML
 (require 'sml-mode)
+
+;; TRAILING WHITESPACE
+(setq-default show-trailing-whitespace t)
+
+(add-hook
+ 'term-mode-hook
+ (lambda() (setq show-trailing-whitespace nil)))
+
 
 ;;----------------
 ;; APPEARANCE
