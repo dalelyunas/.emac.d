@@ -100,10 +100,6 @@
 (setq projectile-completion-system 'helm)
 (projectile-mode)
 
-;; MULTI-TERM
-(require 'multi-term)
-(setq multi-term-program "/bin/zsh")
-
 ;; HELM
 (require 'helm)
 (require 'helm-config)
