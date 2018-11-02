@@ -178,7 +178,7 @@
 ;;----------------
 
 (load-theme 'gruvbox t)
-(set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-14")
+(set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-12")
 
 
 ;;----------------
