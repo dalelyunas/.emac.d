@@ -18,6 +18,18 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+(defconst user-init-dir
+  (cond ((boundp 'user-emacs-directory)
+         user-emacs-directory)
+        ((boundp 'user-init-directory)
+         user-init-directory)
+        (t "~/.emacs.d/")))
+
+(defun load-user-file (file)
+  (interactive "f")
+  "Load a file in current user's configuration directory"
+  (load-file (expand-file-name file user-init-dir)))
+
 ;;----------------
 ;; LOAD PACKAGES
 ;;----------------
@@ -34,8 +46,8 @@
 (setq package-list
       '(async helm gruvbox-theme company smartparens js2-mode js2-refactor
 	      xref-js2 flycheck json-mode
-              magit exec-path-from-shell git-gutter projectile helm-projectile
-              vue-mode elpy sml-mode 2048-game))
+              exec-path-from-shell git-gutter projectile helm-projectile
+              vue-mode elpy sml-mode 2048-game s dash))
 
 ; activate all the packages
 (package-initialize)
@@ -90,10 +102,6 @@
 (setq js2-mode-show-parse-errors nil)
 (setq js2-mode-show-strict-warnings nil)
 
-;; SMARTPARENS
-;; (require 'smartparens)
-;; (smartparens-global-mode 1)
-
 ;; PROJECTILE
 (require 'projectile)
 
@@ -113,12 +121,12 @@
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
 
-(setq helm-M-x-fuzzy-match t)
-(setq helm-buffers-fuzzy-matching t)
-(setq helm-recentf-fuzzy-match t)
+(setq helm-M-x-fuzzy-match t
+      helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match t
+      helm-autoresize-max-height 0
+      helm-autoresize-min-height 20)
 
-(setq helm-autoresize-max-height 0)
-(setq helm-autoresize-min-height 20)
 (helm-autoresize-mode 1)
 
 (helm-projectile-on)
@@ -127,6 +135,8 @@
 
 ;; LINTING
 (require 'flycheck)
+
+(load-user-file "flycheck-sml.el")
 
 ;; disable jshint since we prefer eslint checking
 (setq-default flycheck-disabled-checkers
@@ -158,8 +168,6 @@
 (with-eval-after-load 'flycheck
   (advice-add 'flycheck-eslint-config-exists-p :override (lambda() t)))
 
-;; GIT
-(require 'magit)
 (global-git-gutter-mode +1)
 
 ;; SML
@@ -178,7 +186,7 @@
 ;;----------------
 
 (load-theme 'gruvbox t)
-(set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-12")
+(set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-14")
 
 
 ;;----------------
