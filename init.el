@@ -87,7 +87,7 @@
   :config (global-git-gutter-mode 1))
 
 (use-package doom-themes
-  :config (load-theme 'doom-city-lights t))
+  :config (load-theme 'doom-molokai t))
 
 (defun setup-tide-mode ()
   (interactive)
@@ -97,7 +97,7 @@
 (use-package tide
   :hook ((typescript-mode . setup-tide-mode)
          (rjsx-mode . setup-tide-mode)
-         (js-mode . setup-tide-mode)))
+         (js2-mode . setup-tide-mode)))
 
 (use-package js2-mode
   :mode "\\.js$"
