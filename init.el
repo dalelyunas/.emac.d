@@ -54,7 +54,8 @@
               helm-buffers-fuzzy-matching t
               helm-recentf-fuzzy-match t
               helm-autoresize-max-height 0
-              helm-autoresize-min-height 20)
+              helm-autoresize-min-height 20
+              helm-follow-mode-persistent t)
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-mini)
@@ -86,9 +87,6 @@
 (use-package git-gutter
   :config (global-git-gutter-mode 1))
 
-(use-package doom-themes
-  :config (load-theme 'doom-molokai t))
-
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -109,5 +107,8 @@
 
 (use-package json-mode
   :mode "\\.json$")
+
+(use-package airline-themes
+  :config (load-theme 'airline-light))
 
 (set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-14")
