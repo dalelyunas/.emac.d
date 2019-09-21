@@ -108,7 +108,13 @@
 (use-package json-mode
   :mode "\\.json$")
 
-(use-package airline-themes
-  :config (load-theme 'airline-light))
+(use-package dracula-theme
+  :config (load-theme 'dracula))
 
-(set-face-attribute 'default nil :font "MesloLGLDZ Nerd Font-14")
+(use-package markdown-mode
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+(setq default-frame-alist ('(font "Monaco-15")))
